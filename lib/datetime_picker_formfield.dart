@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show TextInputFormatter;
 import 'package:intl/intl.dart' show DateFormat;
@@ -13,6 +14,7 @@ class DateTimeField extends FormField<DateTime> {
   DateTimeField({
     @required this.format,
     @required this.onShowPicker,
+    this.isRequired = false,
 
     // From super
     Key key,
@@ -89,7 +91,6 @@ class DateTimeField extends FormField<DateTime> {
                 ),
                 keyboardType: keyboardType,
                 textInputAction: textInputAction,
-
                 style: style,
                 strutStyle: strutStyle,
                 textAlign: textAlign,
@@ -127,6 +128,8 @@ class DateTimeField extends FormField<DateTime> {
   /// `DateFormat("EEEE, MMMM d, yyyy 'at' h:mma")`
   /// (Sunday, June 3, 2018 at 9:24pm)
   final DateFormat format;
+
+  final bool isRequired;
 
   /// Called when the date chooser dialog should be shown.
   final Future<DateTime> Function(BuildContext context, DateTime currentValue)
@@ -319,6 +322,7 @@ class _DateTimeFieldState extends FormFieldState<DateTime> {
 
   bool shouldShowClearIcon([InputDecoration decoration]) =>
       widget.resetIcon != null &&
+      !widget.isRequired &&
       (hasText || hasFocus) &&
       decoration?.suffixIcon == null;
 }
