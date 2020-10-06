@@ -21,7 +21,7 @@ class DateTimeField extends FormField<DateTime> {
     FormFieldSetter<DateTime> onSaved,
     FormFieldValidator<DateTime> validator,
     DateTime initialValue,
-    bool autovalidate = false,
+    AutovalidateMode autovalidateMode,
     bool enabled = true,
 
     // Features
@@ -67,7 +67,7 @@ class DateTimeField extends FormField<DateTime> {
     InputCounterWidgetBuilder buildCounter,
   }) : super(
             key: key,
-            autovalidate: autovalidate,
+            autovalidateMode: autovalidateMode,
             initialValue: initialValue,
             enabled: enabled ?? true,
             validator: validator,
